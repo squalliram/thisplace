@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>This Place Coding Challenge</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.1017/styles/kendo.material.mobile.min.css" />
+    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/MovieListing.css">
+    <script type="text/javascript" src="js/MovieListing.js"></script>
+</head>
+
+<body>
+    <div>
+        <h1 id="siteHeading">TheatreZone</h1>
+        <div class="container">
+            <a href="#" class="fileButton" onclick="LoadMovieListings();return false;" id="loadFileButton">Load Movie Listings</a>
+        </div>
+        <div class="movieDetailsContainer">
+            <div id="filterContainer">
+                <div id="checkboxes"></div>
+                <div id="rating">
+                    <h4>Rating</h4>
+                    <input id="slider" class="balSlider" value="5" title="slider" />
+                </div>
+            </div>
+            <div id="popularMoviesGrid"></div>
+            <script id="rowTemplate" type="text/x-kendo-tmpl">
+                <tr data-uid="#: uid #">
+                    <td class="posterContainer">
+                        <img class="moviePosterImage" src="https://image.tmdb.org/t/p/w500/#:poster_path#" />
+                    </td>
+                    <td class="movieDetails">
+                        <div class="movieTitle">#: title #</div>
+                        <div class="movieGenre">
+                            <input type="hidden" id="#:id#" value="#: JSON.stringify(genre_ids)#">#:genreNames#</div>
+                    </td>
+                </tr>
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
