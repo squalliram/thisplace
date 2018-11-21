@@ -1,3 +1,4 @@
+// This is the main function that is called everytime to call the Movie API
 function callAPI(url, callback) {
     var currentFile = new XMLHttpRequest();
     var allText = "",
@@ -19,12 +20,16 @@ function callAPI(url, callback) {
 
 var checkboxArray = [];
 // this is not working as expected as its not filtering for all (didn't have enough time to fix it :( )
-function updateMovieList(genreValue) {
+function updateMovieList(genreValues) {
     // Genre Filtering
     var A = [];
     var grid = $("#popularMoviesGrid").data("kendoGrid");
     var localDataSource = grid.dataSource;
-    A.push({ field: "genreNames", operator: "contains", value: genreValue });
+
+    for(var i = 0; i < genreValues.length; i++) {
+        A.push({ field: "genreNames", operator: "contains", value: genreValues[i] });
+    }
+    
     localDataSource.filter(A);
     grid.refresh();
 }
@@ -39,29 +44,24 @@ function updateMovieListByRating(ratingValue) {
     grid.refresh();
 }
 
+// This function handles the slider on change event for the rating
 function sliderOnChange(e) {
     updateMovieListByRating(e.value);
 }
 
-function LoadMovieListings() {
+// Self invoking function to start loading the contents on the web page
+(function() {
+//function LoadMovieListings() {
     var apiKey = "78905ac5ec561fa73fcbbc30ce14a016",
         language = "en-US";
     document.getElementsByClassName("fileButton").innerHTML = "";
 
-    // This initiates the slider for the rating
-    var slider = $("#slider").kendoSlider({
-        change: sliderOnChange,
-        increaseButtonTitle: "Right",
-        decreaseButtonTitle: "Left",
-        min: 0,
-        max: 10,
-        smallStep: 1,
-        largeStep: 1
-    }).data("kendoSlider");
-
     // First load all genres, then all movies and then start querying information
     callAPI("https://api.themoviedb.org/3/genre/movie/list?api_key=" + apiKey + "&language=" + language, function(genres) {
         var allGenres = genres["genres"];
+
+        // Clear all the elements first in case the user clicks on the button again
+        $("#checkboxes").empty();
 
         // Creating dynamic checkboxes based on the genres available
         $.each(allGenres, function () {
@@ -83,7 +83,7 @@ function LoadMovieListings() {
                     checkboxArray.splice(index, 1);
            }
            
-           updateMovieList(checkboxArray.join(","));
+           updateMovieList(checkboxArray);
         });
 
         // Creating a key value pair for genres based on their ID's
@@ -106,7 +106,7 @@ function LoadMovieListings() {
                 for(var j = 0; j < genreList.length; j++) {
                     genreNames.push(genresJsonObj[genreList[j]]);
                 }
-                allMovies["results"][i]["genreNames"] = genreNames.join(",");
+                allMovies["results"][i]["genreNames"] = genreNames.join(" / ");
             }
 
 
@@ -128,6 +128,19 @@ function LoadMovieListings() {
                 },
                 columns: ["Now Playing"]
             }).data("kendoGrid");
+
+            // This initiates the slider for the rating
+            var slider = $("#slider").kendoSlider({
+                change: sliderOnChange,
+                increaseButtonTitle: "Right",
+                decreaseButtonTitle: "Left",
+                min: 0,
+                max: 10,
+                smallStep: 1,
+                largeStep: 1
+            }).data("kendoSlider");
+
+            $(".filterHeading").show();
         });
     });
-}
+})();

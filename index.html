@@ -19,18 +19,19 @@
 <body>
     <div>
         <h1 id="siteHeading">TheatreZone</h1>
-        <div class="container">
-            <a href="#" class="fileButton" onclick="LoadMovieListings();return false;" id="loadFileButton">Load Movie Listings</a>
-        </div>
         <div class="movieDetailsContainer">
             <div id="filterContainer">
+                <h4 class="filterHeading">Genres</h4>
                 <div id="checkboxes"></div>
-                <div id="rating">
-                    <h4>Rating</h4>
-                    <input id="slider" class="balSlider" value="5" title="slider" />
-                </div>
             </div>
+            <!-- Rating Slider -->
+            <div id="rating">
+                <h4 class="filterHeading">Rating</h4>
+                <input id="slider" class="balSlider" value="5" title="slider" />
+            </div>
+            <!-- Popular Movies Grid -->
             <div id="popularMoviesGrid"></div>
+            <!-- Kendo Template for all the movies that will be shown in the Grid -->
             <script id="rowTemplate" type="text/x-kendo-tmpl">
                 <tr data-uid="#: uid #">
                     <td class="posterContainer">

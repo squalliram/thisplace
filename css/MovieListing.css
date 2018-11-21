@@ -16,6 +16,14 @@ html {
     height: 100%;
 }
 
+h4 {
+    display: none;
+    text-align: center;
+    font-size: 23px;
+    color: #1a181d;
+    margin: 0px;
+}
+
 body {
     background-image: url(https://image.tmdb.org/t/p/original/aw4FOsWr2FY373nKSxbpNi3fz4F.jpg);
     background-repeat: no-repeat;
@@ -27,21 +35,21 @@ body {
 }
 
 .k-grid-header th.k-header>.k-link {
-	font-size: 22px;
-	font-weight: 700;
-	color: #1a181d;
-	background-color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a181d;
+    background-color: #FFFFFF;
 }
 
 .k-grid-header .k-header {
-	background-color: #FFFFFF;	
+    background-color: #FFFFFF;
 }
 
 #checkboxes {
-	padding: 10px;
-	margin: 10px;
-	background-color: #039BE5;
-	border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
 }
 
 #loadFileButton,
@@ -62,8 +70,14 @@ div > p {
     text-align: center;
 }
 
+#rating, #filterContainer {
+    padding-bottom: 15px;
+    background-color: #f4f4f4;
+}
+
 #slider {
-	display: none;
+    display: none;
+    background-color: red;
 }
 
 .demo-section {
@@ -76,6 +90,15 @@ div.balSlider {
 
 div.balSlider .k-slider-selection {
     display: none;
+}
+
+.k-tooltip {
+    display: block !important;
+}
+
+.k-tick.k-tick-large > .k-label {
+    color: #3f51b5;
+    font-weight: 700;
 }
 
 .movieTitle {
@@ -113,16 +136,4 @@ div.balSlider .k-slider-selection {
 
 .k-grid tr td {
     border-bottom-width: 0px;
-}
-
-.inputContainer {
-    width: 300px;
-    float: left;
-    font-weight: 700;
-}
-
-.outputContainer {
-    width: 300px;
-    float: right;
-    font-weight: 700;
 }
